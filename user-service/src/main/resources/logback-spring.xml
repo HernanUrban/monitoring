@@ -1,0 +1,75 @@
+<configuration>
+    <springProperty scope="context" name="springAppName" source="spring.application.name"/>
+    <springProperty scope="context" name="profileActive" source="spring.profiles.active"/>
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{HH:mm:ss} [%thread] [%X{traceId}] %-5level %logger{36} [%file:%line] - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="FileApp" class="ch.qos.logback.core.FileAppender">
+        <encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
+            <providers>
+                <timestamp>
+                    <timeZone>UTC</timeZone>
+                </timestamp>
+                <pattern>
+                    <pattern>
+                        {
+                        "severity": "%level",
+                        "service": "${springAppName}",
+                        "profiles": "${profileActive}",
+                        "class": "%class",
+                        "logger": "%logger",
+                        "user": "%X{user-id:--}",
+                        "trace" : "%X{traceId:--}",
+                        "span": "%X{spanId:--}",
+                        "flags" : "%X{traceFlags:--}",
+                        "pid": "${PID:-}",
+                        "thread": "%thread",
+                        "class": "%logger{40}",
+                        "message": "%message",
+                        "exception": "%ex"
+                        }
+                    </pattern>
+                </pattern>
+            </providers>
+        </encoder>
+        <file>../logs/user-service.log</file>
+    </appender>
+
+    <appender name="logstash" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
+            <providers>
+                <timestamp>
+                    <timeZone>UTC</timeZone>
+                </timestamp>
+                <pattern>
+                    <pattern>
+                        {
+                        "severity": "%level",
+                        "service": "${springAppName}",
+                        "profiles": "${profileActive}",
+                        "class": "%class",
+                        "logger": "%logger",
+                        "user": "%X{user-id:--}",
+                        "trace" : "%X{traceId:--}",
+                        "span": "%X{spanId:--}",
+                        "flags" : "%X{traceFlags:--}",
+                        "pid": "${PID:-}",
+                        "thread": "%thread",
+                        "class": "%logger{40}",
+                        "message": "%message",
+                        "exception": "%ex"
+                        }
+                    </pattern>
+                </pattern>
+            </providers>
+        </encoder>
+    </appender>
+
+    <root level="INFO">
+        <appender-ref ref="FileApp" />
+        <appender-ref ref="logstash" />
+    </root>
+</configuration>

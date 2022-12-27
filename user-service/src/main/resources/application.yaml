@@ -1,0 +1,40 @@
+spring:
+  profiles:
+    active: local
+  application:
+    name: user-service
+management:
+  endpoints:
+    web:
+      exposure:
+        include:
+          - health
+          - info
+          - metric
+          - prometheus
+  info:
+    env:
+      enabled: true
+  endpoint:
+    health:
+      show-details: always
+      probes:
+        enabled: true
+info:
+  application:
+    name: ${spring.application.name}
+    description: User service application
+    version: '@project.version@'
+
+opentracing:
+  jaeger:
+    http-sender:
+      url: http://localhost:14268/api/traces
+
+logging:
+  level:
+    web: INFO
+    root: INFO
+client:
+  address:
+    url: http://localhost:8090
