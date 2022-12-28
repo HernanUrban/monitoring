@@ -1,17 +1,14 @@
 package com.urban.observability.user.service
 
 import com.urban.observability.user.client.AddressClient
+import com.urban.observability.user.logging.Logging
 import org.springframework.stereotype.Service
-import java.util.logging.Logger
 
 @Service
-class UserService(private val addressClient: AddressClient) {
-    companion object {
-        val LOG = Logger.getLogger(UserService::class.java.name)
-    }
+class UserService(private val addressClient: AddressClient): Logging {
 
     fun getUserById(id: Long): User {
-        LOG.info("Getting info for user %id")
+        logger.info("Getting info for user $id")
         if (id == 5L) throw RuntimeException("Invalid ID")
         if (id == 3L) Thread.sleep(7000)
         val address = addressClient.getAddress(id)

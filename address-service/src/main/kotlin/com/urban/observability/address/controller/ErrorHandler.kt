@@ -1,7 +1,6 @@
 package com.urban.observability.address.controller
 
-import org.slf4j.Logger
-import org.slf4j.LoggerFactory
+import com.urban.observability.address.logging.Logging
 import org.slf4j.MDC
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.ControllerAdvice
@@ -11,8 +10,7 @@ import org.springframework.web.bind.annotation.ResponseStatus
 
 
 @ControllerAdvice
-class ErrorHandler {
-    private val logger: Logger = LoggerFactory.getLogger(ErrorHandler::class.java)
+class ErrorHandler: Logging{
     @ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR)
     @ExceptionHandler(Exception::class)
     @ResponseBody

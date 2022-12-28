@@ -21,9 +21,9 @@
                         "profiles": "${profileActive}",
                         "class": "%class",
                         "logger": "%logger",
-                        "user": "%X{userId:--}",
-                        "trace" : "%X{traceId:--}",
-                        "span": "%X{spanId:--}",
+                        "userId": "%X{userId:--}",
+                        "traceId" : "%X{traceId:--}",
+                        "spanId": "%X{spanId:--}",
                         "pid": "${PID:-}",
                         "thread": "%thread",
                         "class": "%logger{40}",
@@ -51,9 +51,9 @@
                         "profiles": "${profileActive}",
                         "class": "%class",
                         "logger": "%logger",
-                        "user": "%X{userId:--}",
-                        "trace" : "%X{traceId:--}",
-                        "span": "%X{spanId:--}",
+                        "userId": "%X{userId:--}",
+                        "traceId" : "%X{traceId:--}",
+                        "spanId": "%X{spanId:--}",
                         "pid": "${PID:-}",
                         "thread": "%thread",
                         "class": "%logger{40}",
@@ -67,7 +67,7 @@
     </appender>
 
     <root level="INFO">
-        <appender-ref ref="FileApp" />
         <appender-ref ref="logstash" />
+        <appender-ref ref="FileApp"/>
     </root>
 </configuration>

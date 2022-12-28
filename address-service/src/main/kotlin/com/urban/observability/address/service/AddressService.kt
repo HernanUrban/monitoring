@@ -1,13 +1,14 @@
 package com.urban.observability.address.service
 
+import com.urban.observability.address.logging.Logging
 import org.springframework.stereotype.Service
-import java.lang.RuntimeException
 
 @Service
-class AddressService {
+class AddressService: Logging {
 
     fun getAddressesByUserId(userId: Long): List<Address>{
-        if (userId == 3L) throw RuntimeException("Something went wrong")
+        if (userId == 3L) throw Exception("Something went wrong")
+        logger.debug("Address retrieved for user $userId")
         return listOf(
             Address(
                 AddressType.HOME,

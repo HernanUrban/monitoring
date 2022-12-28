@@ -1,23 +1,22 @@
 
 apiVersion: 1
 
+deleteDatasources:
+  - name: Prometheus
+  - name: Jaeger
+  - name: Loki
+
 datasources:
-  - name: monitoring-prometheus-datasource
+  - name: Prometheus
     type: prometheus
     access: proxy
+    orgId: 1
     url: http://monitoring-prometheus:9090
+    basicAuth: false
+    isDefault: false
+    version: 1
     editable: true
-  - name: monitoring-loki-datasource
-    type: loki
-    access: proxy
-    url: http://monitoring-loki:3100
-    editable: true
-  - name: monitoring-loki-as-prometheus-datasource
-    type: prometheus
-    access: proxy
-    url: http://monitoring-loki:3100/loki
-    editable: true
-  - name: monitoring-jaeger
+  - name: Jaeger
     type: jaeger
     access: proxy
     url: http://jaeger:16686
@@ -25,4 +24,21 @@ datasources:
     isDefault: false
     version: 1
     editable: false
-  
+    apiVersion: 1
+    uid: jaeger
+  - name: Loki
+    type: loki
+    access: proxy
+    orgId: 1
+    url: http://monitoring-loki:3100
+    basicAuth: false
+    isDefault: false
+    version: 1
+    editable: false
+    apiVersion: 1
+    jsonData:
+      derivedFields:
+        - datasourceUid: jaeger
+          matcherRegex: '"traceId":"(.*?)"'
+          name: TraceID
+          url: '$${__value.raw}'
