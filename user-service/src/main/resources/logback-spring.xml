@@ -9,7 +9,7 @@
         </encoder>
     </appender>
 
-    <appender name="FileApp" class="ch.qos.logback.core.FileAppender">
+    <appender name="FILE" class="ch.qos.logback.core.FileAppender">
         <encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
             <providers>
                 <timestamp>
@@ -39,37 +39,9 @@
         <file>${destinationFile}</file>
     </appender>
 
-    <appender name="logstash" class="ch.qos.logback.core.ConsoleAppender">
-        <encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
-            <providers>
-                <timestamp>
-                    <timeZone>UTC</timeZone>
-                </timestamp>
-                <pattern>
-                    <pattern>
-                        {
-                        "severity": "%level",
-                        "service": "${springAppName}",
-                        "profiles": "${profileActive}",
-                        "class": "%class",
-                        "logger": "%logger",
-                        "userId": "%X{userId:--}",
-                        "traceId" : "%X{traceId:--}",
-                        "spanId": "%X{spanId:--}",
-                        "pid": "${PID:-}",
-                        "thread": "%thread",
-                        "class": "%logger{40}",
-                        "message": "%message",
-                        "exception": "%ex"
-                        }
-                    </pattern>
-                </pattern>
-            </providers>
-        </encoder>
-    </appender>
-
-    <root level="INFO">
-        <appender-ref ref="logstash" />
-        <appender-ref ref="FileApp"/>
+    <logger name="com.urban.observability" level="INFO"/>
+    <root level="ERROR">
+        <appender-ref ref="STDOUT" />
+        <appender-ref ref="FILE" />
     </root>
 </configuration>

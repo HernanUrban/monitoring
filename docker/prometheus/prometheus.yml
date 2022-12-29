@@ -17,9 +17,8 @@ scrape_configs:
   - job_name: "user-service"
     metrics_path: /actuator/prometheus
     static_configs:
-      - targets: ["localhost:8080"]
-
+      - targets: ['user-service:8080']
   - job_name: "address-service"
     metrics_path: /actuator/prometheus
     static_configs:
-      - targets: ["localhost:8090"]
+      - targets: ['address-service:8090']
