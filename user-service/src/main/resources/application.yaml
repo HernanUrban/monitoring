@@ -38,3 +38,7 @@ logging:
 client:
   address:
     url: http://localhost:8090
+
+logger:
+  destination:
+    file: '../logs/${spring.application.name}.log'

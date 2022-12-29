@@ -32,4 +32,6 @@ opentracing:
   jaeger:
     http-sender:
       url: http://localhost:14268/api/traces
-
+logger:
+  destination:
+    file: '../logs/${spring.application.name}.log'
