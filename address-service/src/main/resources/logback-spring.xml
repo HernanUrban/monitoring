@@ -5,11 +5,11 @@
 
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
-            <pattern>%d{HH:mm:ss} [%thread] [%X{traceId}] %-5level %logger{36} [%file:%line] - %msg%n</pattern>
+            <pattern>%d{HH:mm:ss} [%thread] [traceId: %X{traceId:--}] [spanId: %X{spanId:--}] %-5level %logger{36} [%file:%line] - %msg%n</pattern>
         </encoder>
     </appender>
 
-    <appender name="FileApp" class="ch.qos.logback.core.FileAppender">
+    <appender name="FILE" class="ch.qos.logback.core.FileAppender">
         <encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
             <providers>
                 <timestamp>
@@ -39,37 +39,11 @@
         <file>${destinationFile}</file>
     </appender>
 
-    <appender name="logstash" class="ch.qos.logback.core.ConsoleAppender">
-        <encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
-            <providers>
-                <timestamp>
-                    <timeZone>UTC</timeZone>
-                </timestamp>
-                <pattern>
-                    <pattern>
-                        {
-                        "severity": "%level",
-                        "service": "${springAppName}",
-                        "profiles": "${profileActive}",
-                        "class": "%class",
-                        "logger": "%logger",
-                        "userId": "%X{userId:--}",
-                        "traceId" : "%X{traceId:--}",
-                        "spanId": "%X{spanId:--}",
-                        "pid": "${PID:-}",
-                        "thread": "%thread",
-                        "class": "%logger{40}",
-                        "message": "%message",
-                        "exception": "%ex"
-                        }
-                    </pattern>
-                </pattern>
-            </providers>
-        </encoder>
-    </appender>
+    <logger name="org.springframework" level="info"/>
+    <logger name="com.urban.observability" level="debug"/>
 
-    <root level="INFO">
-        <appender-ref ref="logstash" />
-        <appender-ref ref="FileApp"/>
+    <root level="ERROR">
+        <appender-ref ref="STDOUT" />
+        <appender-ref ref="FILE" />
     </root>
 </configuration>
