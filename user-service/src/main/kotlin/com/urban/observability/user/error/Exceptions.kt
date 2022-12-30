@@ -36,12 +36,12 @@ class UserNotFoundException(
 class InvalidUserAttributesException(
     params: Array<String>? = null
 ) : UserException(
-    "users.inavlid.params.error",
+    "users.invalid.params.error",
     "Invalid or wrong params $params"
 )
 
 
-class UnexpectedUserUserException(ex: Throwable) : GeneralServiceException(
+class UnexpectedUserException(ex: Throwable) : GeneralServiceException(
     code = "system.unexpected.error",
     message = "Something went really wrong with Address-Service",
     status = INTERNAL_SERVER_ERROR,
