@@ -13,6 +13,10 @@ This example is helpful to monitor the traces between both microservices.
 
 
 ## How to run
+### Pre-requisites
+- Install Java +11 JDK
+- Install Docker
+
 1. Biuld and run
 Execute the shell script that will build both of the services, create the images and then it will run the docker-compose with all the stack:
 ```shell
