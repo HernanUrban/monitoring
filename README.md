@@ -46,7 +46,7 @@ http://localhost:3000
 ```
 
 4. To lookup the logs for the user created, in Grafana select Explore and then choose Loki from the source dropdown.
-On Label filters you can choose job and select the user-service. This means that you will lookup into the user-service logs, then you only need to tipe what should contain the line to search, in this case "jdoe" because that is the email for the created user in the previous step.
+On Label filters you can choose job and select the user-service. This means that you will lookup into the user-service logs, then you only need to type what should contain the line to search, in this case "jdoe" because that is the email for the created user in the previous step.
 
 ![Monitoring](./assets/grafanalookup.png)
 
