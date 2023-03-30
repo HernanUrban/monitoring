@@ -54,6 +54,6 @@ On Label filters you can choose job and select the user-service. This means that
 
 ![Monitoring](./assets/grafanalookup.png)
 
-**Note that you can expand the log founded and there is a link to Jaegger for the trace.
+**Note that you can expand the log founded and there is a link to Jaeger for the trace.
 
 5. You can select another source like Prometheus or Jaeger for metrics and traces.
